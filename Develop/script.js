@@ -7,11 +7,14 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   let length = window.prompt('Please decide on the length of your password, it must be at least 8 characters long and no more than 128 characters.');
-  let special_characters = prompt('Would you like special characters to be included in your password?');
+  let lowercase = prompt('Would you like to include lowercase letters?');
+  let uppercase = prompt('Uppercase?');
+  let numbers = prompt('Numbers?');
+  let special_characters = prompt('Special Characters (such as !@#$%^&*)?');
   // include if function to detect if the client would like special characters or not
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
+  var charset = 'abcdefghijklmnopqrstuvwxyz0123456789'
 
   // passwordText.value = password;
 
