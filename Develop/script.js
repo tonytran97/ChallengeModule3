@@ -6,6 +6,7 @@ var generateBtn = document.querySelector("#generate");
 // this lists out all the prompts for the user to answer.
 function userprompts() {
   length = prompt('Please decide on the length of your password, it must be at least 8 characters long and no more than 128 characters.');
+  //  ensures that the user selects on a password length within parameters or else generation of password is terminated.
   if (!length) {
     alert("Selection of length is required in order to proceed");
     return;
@@ -17,6 +18,11 @@ function userprompts() {
   uppercase = prompt('Uppercase? (Y/N)');
   numbers = prompt('Numbers? (Y/N)');
   special_characters = prompt('Special Characters (such as !@#$%^&*)? (Y/N)');
+  // ensures that the user selects at least one of the criteria or else generation of password is terminated.
+  if (!lowercase && !uppercase && !numbers && !special_characters) {
+    alert("You must select at least one of the character types to be included in the password");
+    return;
+  }
 }
 
 var charSetSelection = {
