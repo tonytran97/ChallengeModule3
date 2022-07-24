@@ -37,15 +37,16 @@ var charSetSelection = {
 
 function generatePassword() {
   userprompts();
-  // one criteria selection
-  if (lowercase) {
-    selection = charSetSelection.lower;
-  } else if (uppercase) {
-    selection = charSetSelection.upper;
-  } else if (numbers) {
-    selection = charSetSelection.numbersSelect;
-  } else if (special_characters) {
-    selection = charSetSelection.special;
+  // all four criteria selection
+  if (lowercase && uppercase && numbers && special_characters) {
+    selection = charSetSelection.lower.concat(charSetSelection.upper, charSetSelection.numbersSelect, charSetSelection.special);
+    // three criteria selection
+  } else if (lowercase && uppercase && numbers) {
+    selection = charSetSelection.lower.concat(charSetSelection.upper, charSetSelection.numbersSelect);
+  } else if (lowercase && uppercase && special_characters) {
+    selection = charSetSelection.lower.concat(charSetSelection.upper, charSetSelection.special);
+  } else if (uppercase && numbers && special_characters) {
+    selection = charSetSelection.upper.concat(charSetSelection.numbersSelect, charSetSelection.special);
     // two criteria selection 
   } else if (lowercase && uppercase) {
     selection = charSetSelection.lower.concat(charSetSelection.upper);
@@ -59,16 +60,13 @@ function generatePassword() {
     selection = charSetSelection.upper.concat(charSetSelection.special);
   } else if (numbers && special_characters) {
     selection = charSetSelection.numbersSelect.concat(charSetSelection.special);
-    // three criteria selection
-  } else if (lowercase && uppercase && numbers) {
-    selection = charSetSelection.lower.concat(charSetSelection.upper, charSetSelection.numbersSelect);
-  } else if (lowercase && uppercase && special_characters) {
-    selection = charSetSelection.lower.concat(charSetSelection.upper, charSetSelection.special);
-  } else if (uppercase && numbers && special_characters) {
-    selection = charSetSelection.upper.concat(charSetSelection.numbersSelect, charSetSelection.special);
-    // all four criteria selection
-  } else if (lowercase && uppercase && numbers && special_characters) {
-    selection = charSetSelection.lower.concat(charSetSelection.upper, charSetSelection.numbersSelect, charSetSelection.special);
+    // one criteria selection
+  } else if (uppercase) {
+    selection = charSetSelection.upper;
+  } else if (numbers) {
+    selection = charSetSelection.numbersSelect;
+  } else if (special_characters) {
+    selection = charSetSelection.special;
   };
   // console.log(selection);
   ranPassGen = [];
