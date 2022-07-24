@@ -25,58 +25,69 @@ function userprompts() {
   }
 }
 
+// list of characters for selection 
+
 var charSetSelection = {
-  lowerCharset: 'abcdefghijklmnopqrstuvwxyz0123456789',
-  upperCharset: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  numbersCharset: '0123456789',
-  specialCharset: ' !"#$%&\'\'()*+,-./:;<=>?@[\]^_`{|}~',
+  lower: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+  upper: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+  numbersSelect: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+  // !!difficulty inserting some symbols!!
+  special: ["!", "#", "$", "%", "&", "*", "+", ",", "-", "<", ">", "?"],
+};
+
+function generatePassword() {
+  userprompts();
+  // one criteria selection
+  if (lowercase) {
+    selection = charSetSelection.lower;
+  } else if (uppercase) {
+    selection = charSetSelection.upper;
+  } else if (numbers) {
+    selection = charSetSelection.numbersSelect;
+  } else if (special_characters) {
+    selection = charSetSelection.special;
+    // two criteria selection 
+  } else if (lowercase && uppercase) {
+    selection = charSetSelection.lower.concat(charSetSelection.upper);
+  } else if (lowercase && numbers) {
+    selection = charSetSelection.lower.concat(charSetSelection.numbersSelect);
+  } else if (lowercase && special_characters) {
+    selection = charSetSelection.lower.concat(charSetSelection.special);
+  } else if (uppercase && numbers) {
+    selection = charSetSelection.upper.concat(charSetSelection.numbersSelect);
+  } else if (uppercase && special_characters) {
+    selection = charSetSelection.upper.concat(charSetSelection.special);
+  } else if (numbers && special_characters) {
+    selection = charSetSelection.numbersSelect.concat(charSetSelection.special);
+    // three criteria selection
+  } else if (lowercase && uppercase && numbers) {
+    selection = charSetSelection.lower.concat(charSetSelection.upper, charSetSelection.numbersSelect);
+  } else if (lowercase && uppercase && special_characters) {
+    selection = charSetSelection.lower.concat(charSetSelection.upper, charSetSelection.special);
+  } else if (uppercase && numbers && special_characters) {
+    selection = charSetSelection.upper.concat(charSetSelection.numbersSelect, charSetSelection.special);
+    // all four criteria selection
+  } else if (lowercase && uppercase && numbers && special_characters) {
+    selection = charSetSelection.lower.concat(charSetSelection.upper, charSetSelection.numbersSelect, charSetSelection.special);
+  };
+  // console.log(selection);
+  ranPassGen = [];
+  for (var i = 0; i < length; i++) {
+    choiceSelections = selection[Math.floor(Math.random() * selection.length)];
+    // console.log(choiceSelections);
+    ranPassGen.push(choiceSelections);
+    // console.log(ranPassGen.join(''));
+    newGeneratedPassword = ranPassGen.join('');
+  };
+  return ranPassGen;
 }
 
 // Write password to the #password input
 function writePassword() {
-  userprompts();
-  // one criteria selection
-  if (lowercase) {
-    selection = lowerCharset;
-  } else if (uppercase) {
-    selection = upperCharset;
-  } else if (numbers) {
-    selection = numbersCharset;
-  } else if (special_characters) {
-    selection = specialCharset;
-    // two criteria selection 
-  } else if (lowercase && uppercase) {
-    selection = lowerCharset.concat(upperCharset);
-  } else if (lowercase && numbers) {
-    selection = lowerCharset.concat(numbersCharset);
-  } else if (lowercase && special_characters) {
-    selection = lowerCharset.concat(specialCharset);
-  } else if (uppercase && numbers) {
-    selection = upperCharset.concat(numbersCharset);
-  } else if (uppercase && special_characters) {
-    selection = upperCharset.concat(specialCharset);
-  } else if (numbers && special_characters) {
-    selection = numbersCharset.concat(specialCharset);
-    // three criteria selection
-  } else if (lowercase && uppercase && numbers) {
-    selection = lowerCharset.concat(upperCharset, numbersCharset);
-  } else if (lowercase && uppercase && special_characters) {
-    selection = lowerCharset.concat(upperCharset, specialCharset);
-  } else if (uppercase && numbers && special_characters) {
-    selection = upperCharset.concat(numbersCharset, specialCharset);
-    // all four criteria selection
-  } else if (lowercase && uppercase && numbers && special_characters) {
-    selection = lowerCharset.concat(upperCharset, numbersCharset, specialCharset);
-  }
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
-
-  passwordText.value = password;
-
+  passwordText.value = newGeneratedPassword;
 }
-
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
