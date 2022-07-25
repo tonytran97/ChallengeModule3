@@ -7,9 +7,9 @@ which then needed to be cloned and modified to fulfill all functionality and acc
 
 Screenshot
 
-![Mock-Up](Develop/images/PasswordGenerator.png)
+![Mock-Up](/images/PasswordGenerator.png)
 
-![Testing-Code](Develop/images/Test.png)
+![Testing-Code](/images/Test.png)
 
 Link to Deployed Webpage
 
