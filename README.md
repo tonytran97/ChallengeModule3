@@ -6,8 +6,11 @@ The purpose of this week's Challenge is to generate a random password based on t
 which then needed to be cloned and modified to fulfill all functionality and acceptance criteria. 
 
 Screenshot
-![Mock-Up](/images/PasswordGenerator.png)
-![Testing-Code](/images/Test.png)
+
+![Mock-Up](Develop/images/PasswordGenerator.png)
+
+![Testing-Code](Develop/images/Test.png)
 
 Link to Deployed Webpage
+
 https://tonytran97.github.io/ChallengeModule3/
